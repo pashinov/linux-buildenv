@@ -7,7 +7,7 @@ case "$1" in
 	start)
 		printf "Starting configuration network: "
 
-		echo ""                                             >> /etc/network/interfaces
+		echo ""                                             > /etc/network/interfaces
 		echo "# Wired or wireless interfaces"               >> /etc/network/interfaces
 		echo "auto eth0"                                    >> /etc/network/interfaces
 		echo "iface eth0 inet static"                       >> /etc/network/interfaces
