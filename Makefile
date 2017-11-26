@@ -2,7 +2,7 @@
 
 .PHONY: default linux clean distclean
 
-default: linux;
+default: linux
 
 linux:
 	$(MAKE) -C linux
