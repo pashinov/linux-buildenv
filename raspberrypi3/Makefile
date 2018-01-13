@@ -4,7 +4,7 @@ export TARGET = raspberrypi3
 
 .PHONY: default linux image clean distclean
 
-default: image;
+default: image
 
 linux:
 	$(MAKE) -C .. linux
