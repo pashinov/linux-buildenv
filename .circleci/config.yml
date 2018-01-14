@@ -1,0 +1,19 @@
+version: 2
+
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run: git submodule update --init --recursive
+      - run: docker build -t linux-buildenv .
+      - run: docker build -t linux-buildenv .
+      - run: docker create --name fw --volume /home/circleci/project:/home/develop/linux-buildenv --interactive --tty linux-buildenv:latest
+      - run: docker start fw
+      - run: docker exec fw sh /home/develop/linux-buildenv/raspberrypi3/Makeit
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
