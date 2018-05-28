@@ -22,7 +22,7 @@ Creating a custom linux images for various platforms into a Docker Container
 
 2. Create a new container
     ```
-    $ docker create --name fw --volume /home/circleci/project:/home/develop/linux-buildenv --interactive --tty linux-buildenv:latest
+    $ docker create --name fw --volume ${PWD}:/home/develop/linux-buildenv --interactive --tty linux-buildenv:latest
     ```
 
 3. Start a container
