@@ -1,7 +1,6 @@
-# Pull base image
 FROM ubuntu:16.04
 
-MAINTAINER Alexey Pashinov <pashinov@outlook.com>
+MAINTAINER Alexey Pashinov <pashinov93@gmail.com>
 
 # Install
 RUN \
