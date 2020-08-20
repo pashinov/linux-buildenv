@@ -4,3 +4,6 @@
 [submodule "linux/dist/dragon"]
 	path = linux/dist/dragon
 	url = https://github.com/pashinov/dragon.git
+[submodule "linux/dist/phoenix"]
+	path = linux/dist/phoenix
+	url = https://github.com/pashinov/phoenix.git
