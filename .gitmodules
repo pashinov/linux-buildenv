@@ -1,3 +1,6 @@
 [submodule "linux/buildroot"]
 	path = linux/buildroot
 	url = https://github.com/pashinov/buildroot.git
+[submodule "linux/dist/dragon"]
+	path = linux/dist/dragon
+	url = https://github.com/pashinov/dragon.git
