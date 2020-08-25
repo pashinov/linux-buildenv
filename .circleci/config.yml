@@ -1,16 +1,56 @@
 version: 2.1
 jobs:
   build:
+    working_directory: ~/project
     machine: true
     steps:
       - checkout
-      - run: git submodule update --init --recursive
-      - run: docker build -t linux-buildenv .
-      - run: docker create --name fw --volume /home/circleci/project:/home/develop/linux-buildenv --interactive --tty linux-buildenv:latest
-      - run: docker start fw
-      - run: docker exec fw sh /home/develop/linux-buildenv/raspberrypi3/Makeit
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Update submodules
+          command: 'git submodule update --init --recursive'
+      - run:
+          name: Build docker image
+          command: 'docker build -t linux-buildenv .'
+      - run:
+          name: Build docker container
+          command: 'docker create --name fw --volume ${PWD}:/home/develop/linux-buildenv --interactive --tty linux-buildenv:latest'
+      - run:
+          name: Run docker container
+          command: 'docker start fw'
+      - run:
+          name: Build firmware image for RaspberryPi3
+          command: 'docker exec fw sh /home/develop/linux-buildenv/raspberrypi3/Makeit'
+      - run:
+          name: Create Artifacts
+          command: 'tar -C raspberrypi3 -czf raspberrypi3-image.tar.gz raspberrypi3.img && mkdir artifacts && mv raspberrypi3-image.tar.gz artifacts/'
+      - persist_to_workspace:
+          root: ~/project
+          paths: ./artifacts
+
+  publish-github-release:
+    working_directory: ~/project
+    docker:
+      - image: cibuilds/github:0.10
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run: pwd && ls ~/project
+      - run:
+          name: "Publish Release on GitHub"
+          command: |
+            VERSION=$CIRCLE_BRANCH
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
 
 workflows:
+  version: 2
   build:
     jobs:
       - build
+      - publish-github-release:
+          requires:
+            - build
+          filters:
+            branches:
+              only: /^v\d+\.\d+\.\d+$/
