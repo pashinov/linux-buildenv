@@ -7,3 +7,9 @@
 [submodule "linux/dist/phoenix"]
 	path = linux/dist/phoenix
 	url = https://github.com/pashinov/phoenix.git
+[submodule "linux/dist/lion"]
+	path = linux/dist/lion
+	url = https://github.com/pashinov/lion.git
+[submodule "linux/dist/turtle"]
+	path = linux/dist/turtle
+	url = https://github.com/pashinov/turtle.git
