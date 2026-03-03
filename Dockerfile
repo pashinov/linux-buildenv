@@ -1,6 +1,6 @@
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 
-MAINTAINER Alexey Pashinov <pashinov93@gmail.com>
+LABEL maintainer="Alexey Pashinov <pashinov93@gmail.com>"
 
 ENV TZ=Europe/Moscow
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -12,18 +12,24 @@ RUN \
   file \
   wget \
   cpio \
-  python \
+  python3 \
   unzip \
   rsync \
   bc \
   git \
-  locales
+  locales \
+  patch \
+  gawk \
+  bzip2 \
+  perl \
+  libncurses-dev \
+  && rm -rf /var/lib/apt/lists/*
 
-# Generating locales 
+# Generating locales
 RUN locale-gen en_US.UTF-8
 
 # Environment
-ENV HOME /home/develop
+ENV HOME=/home/develop
 WORKDIR /home/develop
 
 ENV FORCE_UNSAFE_CONFIGURE=1

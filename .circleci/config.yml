@@ -15,7 +15,7 @@ jobs:
           command: 'docker build -t linux-buildenv .'
       - run:
           name: Build docker container
-          command: 'docker create --name fw --volume ${PWD}:/home/develop/linux-buildenv --interactive --tty linux-buildenv:latest'
+          command: 'docker create --name fw --network host --volume ${PWD}:/home/develop/linux-buildenv:z --interactive --tty linux-buildenv:latest'
       - run:
           name: Run docker container
           command: 'docker start fw'

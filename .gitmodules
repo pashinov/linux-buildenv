@@ -1,15 +1,6 @@
 [submodule "linux/buildroot"]
 	path = linux/buildroot
 	url = https://github.com/pashinov/buildroot.git
-[submodule "linux/dist/dragon"]
-	path = linux/dist/dragon
-	url = https://github.com/pashinov/dragon.git
-[submodule "linux/dist/phoenix"]
-	path = linux/dist/phoenix
-	url = https://github.com/pashinov/phoenix.git
-[submodule "linux/dist/lion"]
-	path = linux/dist/lion
-	url = https://github.com/pashinov/lion.git
-[submodule "linux/dist/turtle"]
-	path = linux/dist/turtle
-	url = https://github.com/pashinov/turtle.git
+[submodule "linux/dist/nexus"]
+	path = linux/dist/nexus
+	url = https://github.com/pashinov/nexus.git
